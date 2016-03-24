@@ -2,9 +2,9 @@
   <ion-content ng-controller="SearchCtrl as search" class="padding" data-ng-init="landing()">
     <div class="item item-input-inset">
       <label class="item-input-wrapper">
-        <input type="search" placeholder="Search" ng-model="search">
+        <input class="search-field"type="search" ng-model="search" placeholder="Search" >
       </label>
-      <button class="button button-small button-royal" ng-click="doSearch()"> Search</button>
+      <button class="button button-small" ng-click="doSearch()"> Search</button>
     </div>
       <img collection-repeat="photo in photos"
        item-height="33%" item-width="33%" ng-src="{{photo}}" ng-click="showImages($index)" class="image-list-thumb">

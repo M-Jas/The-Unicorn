@@ -43,13 +43,15 @@
   background-color: #ffd464;
 }
 .item{
-  background-color: #fccdd3;
-  border-color: #6534ff;
+  background-color: #1253a4;
+  border-color: #30302f;
+  border-radius: 90px;
 }
 
 .button {
-  background-color: #fccdd3;
+  background-color: #f26964;
 }
-.bar-stable {
+
+.search-field {
   background-color: #1253a4;
 }
