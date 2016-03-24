@@ -1,0 +1,6 @@
+<ion-view view-title="Trending">
+  <ion-content ng-controller="TrendingCtrl as trending" class="padding">
+    <img collection-repeat="photo in photos"
+     item-height="33%" item-width="33%" ng-src="{{photo}}" ng-click="showImages($index)" class="image-list-thumb">
+  </ion-content>
+</ion-view>
