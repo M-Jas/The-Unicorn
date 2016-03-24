@@ -40,6 +40,10 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: '/trending',
       templateUrl: 'templates/trending.html'
     })
+    .state('search', {
+      url: '/search',
+      templateUrl: 'templates/search.html'
+    })
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/main');
