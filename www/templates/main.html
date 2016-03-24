@@ -1,14 +1,8 @@
 <ion-view view-title="The Unicorn">
   <ion-content ng-controller="MainCtrl as main" class="padding" data-ng-init="landing()">
-    <!-- <div class="list card"> -->
-      <!-- <div class="item item-divider">Template Content</div> -->
-      <!-- <div class="item item-body"> -->
         <div>
           <img collection-repeat="photo in photos"
           item-height="33%" item-width="33%" ng-src="{{photo}}" ng-click="showImages($index)" class="image-list-thumb">
-          This is a blank template.
         </div>
-      <!-- </div> -->
-    <!-- </div> -->
   </ion-content>
 </ion-view>
