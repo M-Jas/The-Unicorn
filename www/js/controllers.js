@@ -72,6 +72,10 @@ angular.module('starter.controllers', [])
   $scope.photos = [];
    var searchItem;
 
+   window.addEventListener('native.keyboardshow', function(){
+   document.body.classList.add('keyboard-open');
+  });
+
    $scope.doSearch = function() {
      if(!$scope.search) return;
        searchItem = $scope.search;
