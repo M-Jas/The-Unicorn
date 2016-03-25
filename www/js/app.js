@@ -31,14 +31,28 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-
-    .state('main', {
+  .state('tabs', {
+    url: '/tab',
+    abstract: true,
+    templateUrl: 'templates/tabs.html'
+  })
+    .state('tabs.main', {
       url: '/main',
-      templateUrl: 'templates/main.html'
+      views: {
+        'tab-main': {
+          templateUrl: 'templates/main.html',
+          controller: 'MainCtrl'
+        }
+      }
     })
-    .state('trending', {
+    .state('tabs.trending', {
       url: '/trending',
-      templateUrl: 'templates/trending.html'
+      views: {
+        'tab-trending': {
+          templateUrl: 'templates/trending.html',
+          controller: 'TrendingCtrl'
+        }
+      }
     })
     .state('search', {
       url: '/search',
@@ -46,6 +60,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     })
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/main');
+  $urlRouterProvider.otherwise('/tab/main');
 
 });
