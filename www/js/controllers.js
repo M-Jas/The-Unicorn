@@ -82,8 +82,6 @@ angular.module('starter.controllers', [])
       $http.get("http://api.giphy.com/v1/gifs/search?&api_key=dc6zaTOxFJmzC&limit=100&q=" + searchItem).then(function(resp) {
           $scope.photos = [];
          for (var i = 0; i < resp.data.data.length; i++) {
-           $scope.response = resp
-           console.log($scope.response);
            $scope.photos.push(resp.data.data[i].images.original.url);
          }
       }, function(err) {
