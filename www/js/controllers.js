@@ -72,6 +72,11 @@ angular.module('starter.controllers', [])
   $scope.photos = [];
    var searchItem;
 
+   //  THIS ALERT IS SHOWING THAT THE KEYBOARD IS PRESENTING WITH IN ELEMENT BUT NOT ON THE VIEW
+  //  window.addEventListener('native.keyboardshow', keyboardShowHandler);
+  //  function keyboardShowHandler(e){
+  //      alert('Keyboard height is: ' + e.keyboardHeight);
+  //  }
    window.addEventListener('native.keyboardshow', function(){
    document.body.classList.add('keyboard-open');
   });
