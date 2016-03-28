@@ -14,6 +14,16 @@ angular.module('starter.controllers', [])
     })
   }
 
+  $scope.doRefresh = function() {
+     $http.get("http://api.giphy.com/v1/gifs/search?&api_key=dc6zaTOxFJmzC&limit=100&q=unicorn")
+      .success(function(newItems) {
+        $scope.items = newItems;
+      })
+      .finally(function() {
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+   };
+
   $scope.showImages = function(index) {
 		$scope.activeSlide = index;
 		$scope.showModal('templates/image-popover.html');
@@ -35,6 +45,7 @@ angular.module('starter.controllers', [])
 	};
 
 })
+
 .controller('TrendingCtrl', function($http, $ionicModal,$scope) {
   $scope.photos = [];
   $http.get("http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&limit=100").then(function(resp) {
@@ -46,6 +57,16 @@ angular.module('starter.controllers', [])
    console.error('ERR', err);
   });
 
+  $scope.doRefresh = function() {
+     $http.get("http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&limit=100")
+      .success(function(newItems) {
+        $scope.items = newItems;
+      })
+      .finally(function() {
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+   };
+
   $scope.showImages = function(index) {
 		$scope.activeSlide = index;
 		$scope.showModal('templates/image-popover.html');
@@ -67,16 +88,12 @@ angular.module('starter.controllers', [])
 	};
 
 })
+
 .controller('SearchCtrl', function($scope, $http, $ionicModal) {
 
   $scope.photos = [];
    var searchItem;
 
-   //  THIS ALERT IS SHOWING THAT THE KEYBOARD IS PRESENTING WITH IN ELEMENT BUT NOT ON THE VIEW
-  //  window.addEventListener('native.keyboardshow', keyboardShowHandler);
-  //  function keyboardShowHandler(e){
-  //      alert('Keyboard height is: ' + e.keyboardHeight);
-  //  }
    window.addEventListener('native.keyboardshow', function(){
    document.body.classList.add('keyboard-open');
   });
