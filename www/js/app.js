@@ -9,10 +9,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
+
+// The Keyboard is tying to show up but will not.
+    // cordova.plugins.Keyboard.show();
+    //   window.addEventListener('native.keyboardshow', function(){
+    //   document.body.classList.add('keyboard-open');
+    //  });
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-
       // Don't remove this line unless you know what you are doing. It stops the viewport
       // from snapping when text inputs are focused. Ionic handles this internally for
       // a much nicer keyboard experience.
@@ -25,11 +30,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
-
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
   $stateProvider
   .state('tabs', {
     url: '/tab',
@@ -64,7 +64,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     })
 
-  // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/main');
 
 });

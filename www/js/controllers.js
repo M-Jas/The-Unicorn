@@ -2,10 +2,10 @@ angular.module('starter.controllers', [])
 
 .controller('MainCtrl', function($scope, $http, $ionicModal) {
   $scope.photos = [];
-  var searchItem;
 
   $scope.landing = function(resp) {
     $http.get("http://api.giphy.com/v1/gifs/search?&api_key=dc6zaTOxFJmzC&limit=100&q=unicorn").then(function(resp) {
+      $scope.photos = [];
       for (var i = 0; i < resp.data.data.length; i++) {
         $scope.photos.push(resp.data.data[i].images.original.url);
       }
@@ -13,6 +13,19 @@ angular.module('starter.controllers', [])
       alert('ERR', err);
     })
   }
+
+  $scope.doRefresh = function() {
+     $http.get("http://api.giphy.com/v1/gifs/search?&api_key=dc6zaTOxFJmzC&limit=100&q=unicorn").then(function(resp) {
+       for (var i = 0; i < resp.data.data.length; i++) {
+         $scope.photos.push(resp.data.data[i].images.original.url);
+       }
+     }, function(err) {
+       alert('ERR', err);
+     })
+      .finally(function() {
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+   };
 
   $scope.showImages = function(index) {
 		$scope.activeSlide = index;
@@ -35,8 +48,10 @@ angular.module('starter.controllers', [])
 	};
 
 })
+
 .controller('TrendingCtrl', function($http, $ionicModal,$scope) {
   $scope.photos = [];
+
   $http.get("http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&limit=100").then(function(resp) {
     for (var i = 0; i < resp.data.data.length; i++) {
       $scope.photos.push(resp.data.data[i].images.original.url);
@@ -46,6 +61,20 @@ angular.module('starter.controllers', [])
    console.error('ERR', err);
   });
 
+  $scope.doRefresh = function() {
+     $http.get("http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&limit=100").then(function(resp) {
+       $scope.photos = [];
+       for (var i = 0; i < resp.data.data.length; i++) {
+         $scope.photos.push(resp.data.data[i].images.original.url);
+       }
+     }, function(err) {
+       alert('ERR', err);
+     })
+      .finally(function() {
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+   };
+
   $scope.showImages = function(index) {
 		$scope.activeSlide = index;
 		$scope.showModal('templates/image-popover.html');
@@ -67,10 +96,11 @@ angular.module('starter.controllers', [])
 	};
 
 })
+
 .controller('SearchCtrl', function($scope, $http, $ionicModal) {
 
   $scope.photos = [];
-   var searchItem;
+  var searchItem;
 
    window.addEventListener('native.keyboardshow', function(){
    document.body.classList.add('keyboard-open');
@@ -82,8 +112,6 @@ angular.module('starter.controllers', [])
       $http.get("http://api.giphy.com/v1/gifs/search?&api_key=dc6zaTOxFJmzC&limit=100&q=" + searchItem).then(function(resp) {
           $scope.photos = [];
          for (var i = 0; i < resp.data.data.length; i++) {
-           $scope.response = resp
-           console.log($scope.response);
            $scope.photos.push(resp.data.data[i].images.original.url);
          }
       }, function(err) {

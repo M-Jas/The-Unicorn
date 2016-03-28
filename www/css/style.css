@@ -4,7 +4,6 @@
 
     item-width: 33%;
     item-height: 33%;
-    border-radius: 90px;
     border: 3px solid #ffd453;
 
 }
@@ -30,7 +29,6 @@
     position: fixed;
     right: 0;
     top: 0;
-    border-radius: 90px;
     border: 3px solid #ffd453;
 }
 
@@ -45,17 +43,8 @@
 .item{
   background-color: #1253a4;
   border-color: #30302f;
-  border-radius: 90px;
 }
 
 .button {
   background-color: #ffd453;
-}
-
-.search-field {
-  background-color: #1253a4;
-}
-
-.header {
-  background-color: #f26964;
 }
