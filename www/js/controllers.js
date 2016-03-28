@@ -2,10 +2,10 @@ angular.module('starter.controllers', [])
 
 .controller('MainCtrl', function($scope, $http, $ionicModal) {
   $scope.photos = [];
-  var searchItem;
 
   $scope.landing = function(resp) {
     $http.get("http://api.giphy.com/v1/gifs/search?&api_key=dc6zaTOxFJmzC&limit=100&q=unicorn").then(function(resp) {
+      $scope.photos = [];
       for (var i = 0; i < resp.data.data.length; i++) {
         $scope.photos.push(resp.data.data[i].images.original.url);
       }
@@ -15,10 +15,13 @@ angular.module('starter.controllers', [])
   }
 
   $scope.doRefresh = function() {
-     $http.get("http://api.giphy.com/v1/gifs/search?&api_key=dc6zaTOxFJmzC&limit=100&q=unicorn")
-      .success(function(newItems) {
-        $scope.items = newItems;
-      })
+     $http.get("http://api.giphy.com/v1/gifs/search?&api_key=dc6zaTOxFJmzC&limit=100&q=unicorn").then(function(resp) {
+       for (var i = 0; i < resp.data.data.length; i++) {
+         $scope.photos.push(resp.data.data[i].images.original.url);
+       }
+     }, function(err) {
+       alert('ERR', err);
+     })
       .finally(function() {
         $scope.$broadcast('scroll.refreshComplete');
       });
@@ -48,6 +51,7 @@ angular.module('starter.controllers', [])
 
 .controller('TrendingCtrl', function($http, $ionicModal,$scope) {
   $scope.photos = [];
+
   $http.get("http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&limit=100").then(function(resp) {
     for (var i = 0; i < resp.data.data.length; i++) {
       $scope.photos.push(resp.data.data[i].images.original.url);
@@ -58,10 +62,14 @@ angular.module('starter.controllers', [])
   });
 
   $scope.doRefresh = function() {
-     $http.get("http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&limit=100")
-      .success(function(newItems) {
-        $scope.items = newItems;
-      })
+     $http.get("http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&limit=100").then(function(resp) {
+       $scope.photos = [];
+       for (var i = 0; i < resp.data.data.length; i++) {
+         $scope.photos.push(resp.data.data[i].images.original.url);
+       }
+     }, function(err) {
+       alert('ERR', err);
+     })
       .finally(function() {
         $scope.$broadcast('scroll.refreshComplete');
       });
@@ -92,7 +100,7 @@ angular.module('starter.controllers', [])
 .controller('SearchCtrl', function($scope, $http, $ionicModal) {
 
   $scope.photos = [];
-   var searchItem;
+  var searchItem;
 
    window.addEventListener('native.keyboardshow', function(){
    document.body.classList.add('keyboard-open');
